@@ -1,0 +1,21 @@
+{
+  "name": "form-sem-backend-ajax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathvbarone/form-sem-backend-ajax.git"
+  },
+  "keywords": [],
+  "author": "Matheus Barone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mathvbarone/form-sem-backend-ajax.git/issues"
+  },
+  "homepage": "https://github.com/mathvbarone/form-sem-backend-ajax.git#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
