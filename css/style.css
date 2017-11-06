@@ -21,6 +21,15 @@ body{
     align-items: center;
 }
 
+.title{
+    padding-bottom: 10px;
+}
+
+.title,
+.subtitle{
+    text-align: center;
+}
+
 .form{
     width: 100%;
 }
@@ -30,15 +39,20 @@ body{
     transition: linear 0.2s all;
 }
 
+.button:hover{
+    transform: scale(1.08);
+}
+
 .message:not(:last-child) {
     margin-bottom: 0;
 }
 
-.title{
-    margin-bottom: 10px;
-}
+
+
+
 
 .message-alert{
+    padding: 10px 0;
     text-align: center;
 }
 
@@ -55,6 +69,8 @@ body{
     width: 66px;
     margin: 0 auto 2.5em auto;
 }
+
+
 
 
 
