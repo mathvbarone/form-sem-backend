@@ -123,6 +123,10 @@ const startForm = {
       const container = document.querySelector(".container");
 
       const form = startForm.ui.form;
+      const button = startForm.ui.button;
+
+      button.disabled = true;
+
 
       const request = new XMLHttpRequest();
       request.open("POST", "//formspree.io/matheusbaroneteste@gmail.com", true);
