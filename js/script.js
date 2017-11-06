@@ -69,7 +69,7 @@ const startForm = {
                                     </svg>
                                     <strong>Sua mensagem foi enviada!</strong>
                                     <div class="column is-narrow has-text-centered">
-                                        <button type="button" title="retornar" class="button back-button">Retornar</button>
+                                        <button type="button" title="retornar" class="button is-info back-button">Retornar</button>
                                     </div>
                                 </div>`;
                 ajaxStatus = "success";
@@ -82,7 +82,7 @@ const startForm = {
                                     </svg>
                                     <strong>Ocorreu um erro :( <br/> Tente novamente mais tarde</strong>
                                     <div class="column is-narrow has-text-centered">
-                                        <button type="button" title="retornar" class="button back-button">Retornar</button>
+                                        <button type="button" title="retornar" class="button is-info back-button">Retornar</button>
                                     </div>
                                 </div>`;
                 ajaxStatus = "fail";
@@ -99,15 +99,7 @@ const startForm = {
         },
 
         return: () => {
-            const form = document.querySelector(".form");
-            const fields = startForm.ui.fields;
-            const messageBox = document.querySelectorAll(".message-alert");
-
-            form.classList.remove("is-hidden");
-
-            messageBox.forEach(box =>{
-                box.classList.add("is-hidden");
-            })
+            location.reload();
         },
 
         sendData: e => {
@@ -140,7 +132,12 @@ const startForm = {
                         }, 100);
                     }
                     else {
+                        document.querySelector(".is-loading").classList.add("is-hidden");
+
                         startForm.functions.formMessage("fail");
+
+                        const backButton = document.querySelector(".back-button");
+                        backButton.addEventListener("click", startForm.functions.return);
                     }
 
                 }
@@ -155,14 +152,14 @@ const startForm = {
             const initUi = startForm.ui;
             const initFunctions = startForm.functions;
             const button = initUi.button;
-
+            const form = initUi.form;
 
 
             initUi.fields.forEach(field => {
                 field.addEventListener("input", initFunctions.formValidation);
             });
 
-            button.addEventListener("click", initFunctions.sendData);
+            form.addEventListener("submit", initFunctions.sendData);
         }
     }
 };
