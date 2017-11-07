@@ -14,7 +14,9 @@
     "url": "https://github.com/mathvbarone/form-sem-backend-ajax.git/issues"
   },
   "homepage": "https://github.com/mathvbarone/form-sem-backend-ajax.git#readme",
-  "dependencies": {},
+  "dependencies": {
+    "eslint": "^4.10.0"
+  },
   "devDependencies": {
     "live-server": "^1.2.0"
   }

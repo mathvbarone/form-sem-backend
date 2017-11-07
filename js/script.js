@@ -59,7 +59,7 @@ const startForm = {
                                 <figure>`;
         ajaxStatus = "loading";
       }
-      if (status == "success") {
+      if (status == "fail") {
         messageText = `<div class="success-box">
                                     <svg class="checkmark checkmark-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                                         <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
@@ -67,22 +67,22 @@ const startForm = {
                                     </svg>
                                     <strong>Sua mensagem foi enviada!</strong>
                                     <div class="column is-narrow has-text-centered">
-                                        <button type="button" title="retornar" class="button is-info back-button">Retornar</button>
+                                        <button type="button" title="Retornar" class="button is-info back-button">Retornar</button>
                                     </div>
                                 </div>`;
         ajaxStatus = "success";
       }
-      if (status == "fail") {
+      if (status == "success") {
         messageText = `<div class="error-box">
-                                    <svg class="checkmark  checkmark-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                                        <path class="checkmark-check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
-                                    </svg>
-                                    <strong>Ocorreu um erro :( <br/> Tente novamente mais tarde</strong>
-                                    <div class="column is-narrow has-text-centered">
-                                        <button type="button" title="retornar" class="button is-info back-button">Retornar</button>
-                                    </div>
-                                </div>`;
+                              <svg class="checkmark  checkmark-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                  <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                                  <path class="checkmark-check" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+                              </svg>
+                              <strong>Ocorreu um erro :( <br/> Tente novamente mais tarde</strong>
+                              <div class="column is-narrow has-text-centered">
+                                  <button type="button" title="Retornar" class="button is-info back-button">Retornar</button>
+                              </div>
+                          </div>`;
         ajaxStatus = "fail";
       }
 
@@ -94,6 +94,8 @@ const startForm = {
 
       return msgBox;
     },
+
+
 
     updateMsg: (nodes, msg) => {
       nodes.insertAdjacentHTML("beforeend", msg);
