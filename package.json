@@ -14,10 +14,11 @@
     "url": "https://github.com/mathvbarone/form-sem-backend-ajax.git/issues"
   },
   "homepage": "https://github.com/mathvbarone/form-sem-backend-ajax.git#readme",
-  "dependencies": {
-    "eslint": "^4.10.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "live-server": "^1.2.0"
   }
 }

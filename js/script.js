@@ -1,38 +1,35 @@
 const startForm = {
   // UI DECLARATION
   ui: {
-    form: document.querySelector(".form"),
-    fields: document.querySelectorAll(".input-field"),
+    form: document.querySelector('.form'),
+    fields: document.querySelectorAll('.input-field'),
     inputs: {
-      name: document.querySelector(".name"),
-      email: document.querySelector(".email"),
-      message: document.querySelector(".message")
+      name: document.querySelector('#name'),
+      email: document.querySelector('#email'),
+      message: document.querySelector('#message'),
     },
-    button: document.querySelector(".button"),
+    sendButton: document.querySelector('.button'),
   },
 
   // FUNCTIONS
   functions: {
     formValidation: () => {
-      const name = startForm.ui.inputs.name;
-      const email = startForm.ui.inputs.email;
-      const message = startForm.ui.inputs.message;
-      const input = startForm.ui.fields;
-      const button = startForm.ui.button;
-      let erros = 0;
+      const { name, email, message } = startForm.ui.inputs;
+      const { sendButton } = startForm.ui;
+      let errors = 0;
 
       const nameRegex = /[a-zA-Z\-'\s]+/;
-      const emailRegex = /^[A-z0-9\.\-]{1,}\@\w+\.[A-z]{2,3}(\.[a-z]{2})?$/;
+      const emailRegex = /^[A-z0-9.-]{1,}@\w+\.[A-z]{2,3}(\.[a-z]{2})?$/;
       const msgRegex = /.*\S.*/;
 
       const regexValidation = (regexValue, input) => {
         if (regexValue.test(input.value)) {
-          input.classList.remove("is-danger");
-          input.nextElementSibling.classList.add("is-hidden");
+          input.classList.remove('is-danger');
+          input.nextElementSibling.classList.add('is-hidden');
         } else {
-          input.classList.add("is-danger");
-          input.nextElementSibling.classList.remove("is-hidden");
-          erros++;
+          input.classList.add('is-danger');
+          input.nextElementSibling.classList.remove('is-hidden');
+          errors += 1;
         }
       };
 
@@ -40,13 +37,14 @@ const startForm = {
       regexValidation(emailRegex, email);
       regexValidation(msgRegex, message);
 
-      erros === 0 ? (button.disabled = false) : (button.disabled = true);
+      sendButton.disabled = !!errors;
     },
 
-    formMessage: status => {
-      const container = document.querySelector(".container");
+    formMessage: (status) => {
+      let messageText;
+      let ajaxStatus;
 
-      if (status == "loading") {
+      if (status === 'loading') {
         messageText = `<figure class="is-loading-img">
                                     <svg width="66px"  height="66px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-dual-ring" style="background: none;">
                                         <circle cx="50" cy="50" ng-attr-r="{{config.radius}}" ng-attr-stroke-width="{{config.width}}" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-dasharray="{{config.dasharray}}" fill="none" stroke-linecap="round" r="40" stroke-width="5" stroke="#23d160" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(258 50 50)">
@@ -57,9 +55,9 @@ const startForm = {
                                         </circle>
                                     </svg>
                                 <figure>`;
-        ajaxStatus = "loading";
+        ajaxStatus = 'loading';
       }
-      if (status == "fail") {
+      if (status === 'success') {
         messageText = `<div class="success-box">
                                     <svg class="checkmark checkmark-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                                         <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
@@ -70,9 +68,9 @@ const startForm = {
                                         <button type="button" title="Retornar" class="button is-info back-button">Retornar</button>
                                     </div>
                                 </div>`;
-        ajaxStatus = "success";
+        ajaxStatus = 'success';
       }
-      if (status == "success") {
+      if (status === 'fail') {
         messageText = `<div class="error-box">
                               <svg class="checkmark  checkmark-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                                   <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
@@ -83,10 +81,10 @@ const startForm = {
                                   <button type="button" title="Retornar" class="button is-info back-button">Retornar</button>
                               </div>
                           </div>`;
-        ajaxStatus = "fail";
+        ajaxStatus = 'fail';
       }
 
-      msgBox = `<div class="message-alert">
+      const msgBox = `<div class="message-alert">
                         <div class="is-${ajaxStatus}">
                                 ${messageText}
                         </div>
@@ -95,113 +93,85 @@ const startForm = {
       return msgBox;
     },
 
-
-
     updateMsg: (nodes, msg) => {
-      nodes.insertAdjacentHTML("beforeend", msg);
+      nodes.insertAdjacentHTML('beforeend', msg);
     },
 
     return: () => {
+      const { form } = startForm.ui;
+      const { fields } = startForm.ui;
+      const messageBox = document.querySelectorAll('.message-alert');
 
-      const form = document.querySelector(".form");
-      const fields = document.querySelectorAll(".input-field");
-      const messageBox = document.querySelectorAll(".message-alert");
+      form.style.display = 'block';
 
-      form.style.display = "block";
-
-      fields.forEach(field => {
-          field.value = "";
+      fields.forEach((field) => {
+        field.value = '';
       });
 
-      messageBox.forEach(box =>{
+      messageBox.forEach((box) => {
         box.remove();
       });
     },
 
-    sendData: e => {
+    sendData: (e) => {
       e.preventDefault();
 
       const initFunctions = startForm.functions;
-      const container = document.querySelector(".container");
+      const container = document.querySelector('.container');
 
-      const form = startForm.ui.form;
-      const button = startForm.ui.button;
+      const { form } = startForm.ui;
+      const { sendButton } = startForm.ui;
 
-      button.disabled = true;
-
+      sendButton.disabled = true;
 
       const request = new XMLHttpRequest();
-      request.open("POST", "//formspree.io/matheusbaroneteste@gmail.com", true);
-      request.setRequestHeader("accept", "application/json");
+      request.open('POST', '//formspree.io/matheusbaroneteste@gmail.com', true);
+      request.setRequestHeader('accept', 'application/json');
 
       const formData = new FormData(form);
       request.send(formData);
 
-      request.onreadystatechange = function() {
-
+      request.onreadystatechange = () => {
         if (request.readyState === 3) {
-          form.style.display = "none";
-          initFunctions.updateMsg(
-            container,
-            initFunctions.formMessage("loading")
-          );
+          form.style.display = 'none';
+          initFunctions.updateMsg(container, initFunctions.formMessage('loading'));
+        } else if (request.readyState === 4) {
+          if (request.status === 200 && request.status < 300) {
+            setTimeout(() => {
+              initFunctions.updateMsg(container, initFunctions.formMessage('success'));
 
-        }
-
-        else if (request.readyState === 4) {
-
-          if (request.status == 200 && request.status < 300) {
-
-            setTimeout(function() {
-
-              initFunctions.updateMsg(
-                container,
-                initFunctions.formMessage("success")
-              );
-
-              document.querySelectorAll(".is-loading").forEach( loadBox =>{
-                loadBox.style.display = "none";
+              document.querySelectorAll('.is-loading').forEach((loadBox) => {
+                loadBox.style.display = 'none';
               });
 
-              const backButtons = document.querySelectorAll(".back-button");
+              const backButtons = document.querySelectorAll('.back-button');
 
-              backButtons.forEach( button =>{
-                  button.addEventListener("click", initFunctions.return);
+              backButtons.forEach((button) => {
+                button.addEventListener('click', initFunctions.return);
               });
-
-              return;
             }, 1000);
+          } else {
+            initFunctions.updateMsg(container, initFunctions.formMessage('fail'));
           }
-
-          else {
-            initFunctions.updateMsg(
-              container,
-              initFunctions.formMessage("fail")
-            );
-          }
-
-
         }
       };
-    }
+    },
   },
 
-  //EVENTS
+  // EVENTS
   events: {
     init: () => {
       const initUi = startForm.ui;
       const initFunctions = startForm.functions;
-      const button = initUi.button;
-      const form = initUi.form;
+      const { form } = initUi;
 
-
-      initUi.fields.forEach(field => {
-        field.addEventListener("input", initFunctions.formValidation);
+      initUi.fields.forEach((field) => {
+        field.addEventListener('input', initFunctions.formValidation);
       });
 
-      form.addEventListener("submit", initFunctions.sendData);
-    }
-  }
+      form.addEventListener('submit', initFunctions.sendData);
+    },
+  },
 };
 
 startForm.events.init();
