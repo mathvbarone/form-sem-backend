@@ -111,7 +111,7 @@
   };
 
   // FUNÇÃO REFERENTE ÀS AÇÕES DEPOIS QUE O FORM TIVER SIDO ENVIADO
-  const afterSendMsg = () => {
+  const afterMsgSent = () => {
     form.style.display = "none";
 
     document.querySelectorAll(".is-loading").forEach((loadBox) => {
@@ -142,13 +142,13 @@
           //  SET TIME OUT PARA O LOADING APARECER
           setTimeout(() => {
             displayMessage("success");
-            afterSendMsg();
+            afterMsgSent();
           }, 1000);
         } else {
           //  SET TIME OUT PARA O LOADING APARECER
           setTimeout(() => {
             displayMessage("fail");
-            afterSendMsg();
+            afterMsgSent();
           }, 1000);
         }
       }
