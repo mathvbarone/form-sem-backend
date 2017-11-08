@@ -6,7 +6,7 @@
     emailInput: document.getElementById("email"),
     messageInput: document.getElementById("message"),
     submitButton: document.getElementById("submit-button"),
-    container: document.querySelector(".container"),
+    container: document.querySelector(".container")
   };
 
   const validateForm = () => {
@@ -78,7 +78,7 @@
                     </div>
                   `;
         break;
-        // no default
+      // no default
     }
     ui.container.insertAdjacentHTML(
       "beforeend",
@@ -88,7 +88,7 @@
                     ${message}
             </div>
         </div>
-    `,
+    `
     );
   };
 
@@ -97,17 +97,17 @@
 
     ui.form.style.display = "block";
 
-    ui.fields.forEach((field) => {
+    ui.fields.forEach(field => {
       field.value = "";
     });
 
-    messagesAlert.forEach((message) => {
+    messagesAlert.forEach(message => {
       message.remove();
     });
   };
 
   const returnToForm = () => {
-    document.querySelectorAll(".is-loading").forEach((loadBox) => {
+    document.querySelectorAll(".is-loading").forEach(loadBox => {
       loadBox.style.display = "none";
     });
 
@@ -115,7 +115,7 @@
     backButton.addEventListener("click", returnButtonAction);
   };
 
-  const submitMessage = (e) => {
+  const submitMessage = e => {
     e.preventDefault();
     const request = new XMLHttpRequest();
     request.open("POST", "error", true);
@@ -144,7 +144,7 @@
   };
 
   const init = () => {
-    ui.fields.forEach((field) => {
+    ui.fields.forEach(field => {
       field.addEventListener("input", validateForm);
     });
     ui.form.addEventListener("submit", submitMessage);

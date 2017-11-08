@@ -5,6 +5,7 @@ module.exports = {
         "linebreak-style": 0,
         "no-param-reassign": ["error", {"props": false}],
         "quotes": ["error", "double"],
-        "no-param-reassign": ["error", { "props": false }]
+        "no-param-reassign": ["error", { "props": false }],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
       }
  };
