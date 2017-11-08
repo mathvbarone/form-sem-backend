@@ -102,7 +102,7 @@ body{
 }
 
 .checkmark-error .checkmark-circle{
-    stroke: black;
+    stroke: #bf0000;
 }
 
 .checkmark-circle{
@@ -145,6 +145,6 @@ body{
 
 @keyframes fill-error{
     100%{
-        box-shadow: inset 0px 0px 0px 30px black;
+        box-shadow: inset 0px 0px 0px 30px #bf0000;
     }
 }
