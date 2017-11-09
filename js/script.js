@@ -22,11 +22,9 @@
         field.classList.remove("is-danger");
         field.nextElementSibling.classList.add("is-hidden");
       } else {
-        if (field.value) {
           field.classList.add("is-danger");
           field.nextElementSibling.classList.remove("is-hidden");
-        }
-        submitButton.disabled = true;
+          submitButton.disabled = true;
       }
     };
 
