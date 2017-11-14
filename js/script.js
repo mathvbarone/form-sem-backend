@@ -2,10 +2,10 @@
   // DECLARANDO AS VARIÁVEIS REFERENTES À INTERFACE
   const form = document.querySelector(".form");
   const fields = document.querySelectorAll(".input-field");
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const messageInput = document.getElementById("message");
-  const submitButton = document.getElementById("submit-button");
+  const nameInput = document.querySelector("#name");
+  const emailInput = document.querySelector("#email");
+  const messageInput = document.querySelector("#message");
+  const submitButton = document.querySelector("#submit-button");
   const container = document.querySelector(".container");
 
   // FUNÇÃO DE VALIDAÇÃO DO FORM
@@ -22,15 +22,19 @@
         field.classList.remove("is-danger");
         field.nextElementSibling.classList.add("is-hidden");
       } else {
-          field.classList.add("is-danger");
-          field.nextElementSibling.classList.remove("is-hidden");
-          submitButton.disabled = true;
+        field.classList.add("is-danger");
+        field.nextElementSibling.classList.remove("is-hidden");
+        submitButton.disabled = true;
       }
     };
 
-    validateField(nameRegexp, nameInput);
-    validateField(emailRegexp, emailInput);
-    validateField(msgRegexp, messageInput);
+    const regExpFieldObject = [
+      { regExp: nameRegexp, field: nameInput },
+      { regExp: emailRegexp, field: emailInput },
+      { regExp: msgRegexp, field: messageInput },
+    ];
+
+    regExpFieldObject.forEach(regExpField => validateField(regExpField.regExp, regExpField.field));
   };
 
   // FUNÇÃO REFERENTE ÀS MENSAGENS DE NOTIFICAÇÃO
