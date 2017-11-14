@@ -28,13 +28,15 @@
       }
     };
 
-    const regExpFieldObject = [
+    const regExpAndFieldArray = [
       { regExp: nameRegexp, field: nameInput },
       { regExp: emailRegexp, field: emailInput },
       { regExp: msgRegexp, field: messageInput },
     ];
 
-    regExpFieldObject.forEach(regExpField => validateField(regExpField.regExp, regExpField.field));
+    regExpAndFieldArray.forEach((regExpAndField) => {
+      validateField(regExpAndField.regExp, regExpAndField.field);
+    });
   };
 
   // FUNÇÃO REFERENTE ÀS MENSAGENS DE NOTIFICAÇÃO
@@ -159,9 +161,8 @@
 
   // FUNÇÃO DE INICIALIZAÇÃO
   const init = () => {
-    fields.forEach((field) => {
-      field.addEventListener("input", validateForm);
-    });
+    fields.forEach(field => field.addEventListener("input", validateForm));
+
     form.addEventListener("submit", submitMessage);
   };
 
